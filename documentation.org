@@ -146,7 +146,7 @@ sudo systemctl disable mongod
 2. Puppet : https://forge.puppet.com/modules/puppet/mongodb
 3. Chef : https://supermarket.chef.io/cookbooks/mongodb
 
-** How to setup or database?
+** How to setup our database?
 If we successfully install mongodb on our server, we will have access to mongo cli tool, using that we can do all kind of stuff with our database :).
 Before moving on issue this command to get mongodb's interactive command line:
 #+BEGIN_SRC  shell

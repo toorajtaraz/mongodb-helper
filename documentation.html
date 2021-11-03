@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-03 Wed 08:57 -->
+<!-- 2021-11-03 Wed 09:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MongoDB</title>
@@ -225,29 +225,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3fad2f7">1. MongoDB</a>
+<li><a href="#org9efd221">1. MongoDB</a>
 <ul>
-<li><a href="#org6638401">1.1. MySQL to Mongo Lang!</a>
+<li><a href="#org7ce735d">1.1. MySQL to Mongo Lang!</a>
 <ul>
-<li><a href="#orgedc991c">1.1.1. Table/Collection creation</a></li>
-<li><a href="#org80e357f">1.1.2. Insertion</a></li>
-<li><a href="#org19b53a3">1.1.3. Queries</a></li>
+<li><a href="#org2de8d5d">1.1.1. Table/Collection creation</a></li>
+<li><a href="#orgf8918c3">1.1.2. Insertion</a></li>
+<li><a href="#orgbcbf224">1.1.3. Queries</a></li>
 </ul>
 </li>
-<li><a href="#orgdf040d8">1.2. How to install?</a>
+<li><a href="#orgf6d8016">1.2. How to install?</a>
 <ul>
-<li><a href="#org5e7b9db">1.2.1. Headless windows server</a></li>
-<li><a href="#orgfa36cb9">1.2.2. Centos 8</a></li>
-<li><a href="#org20cbf50">1.2.3. Ubuntu 20.04</a></li>
-<li><a href="#orgc00649e">1.2.4. Starting mongo&rsquo;s service (Ubuntu and Centos)</a></li>
+<li><a href="#org9ec6327">1.2.1. Headless windows server</a></li>
+<li><a href="#org17d555e">1.2.2. Centos 8</a></li>
+<li><a href="#org4800f2d">1.2.3. Ubuntu 20.04</a></li>
+<li><a href="#org7f2c098">1.2.4. Starting mongo&rsquo;s service (Ubuntu and Centos)</a></li>
 </ul>
 </li>
-<li><a href="#org8952888">1.3. How to automate this process?</a></li>
-<li><a href="#orgbe00bf7">1.4. How to setup or database?</a>
+<li><a href="#orgac7dd1f">1.3. How to automate this process?</a></li>
+<li><a href="#orgc4a19a2">1.4. How to setup our database?</a>
 <ul>
-<li><a href="#orgd63a031">1.4.1. Creating a new user with admin access</a></li>
-<li><a href="#org6e3e2ac">1.4.2. Creating a new database</a></li>
-<li><a href="#orgdc9e1e4">1.4.3. Connecting to our database</a></li>
+<li><a href="#org412f425">1.4.1. Creating a new user with admin access</a></li>
+<li><a href="#orgaf7df96">1.4.2. Creating a new database</a></li>
+<li><a href="#org32d5c2f">1.4.3. Connecting to our database</a></li>
 </ul>
 </li>
 </ul>
@@ -256,16 +256,16 @@
 </div>
 </div>
 
-<div id="outline-container-org3fad2f7" class="outline-2">
-<h2 id="org3fad2f7"><span class="section-number-2">1.</span> MongoDB</h2>
+<div id="outline-container-org9efd221" class="outline-2">
+<h2 id="org9efd221"><span class="section-number-2">1.</span> MongoDB</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org6638401" class="outline-3">
-<h3 id="org6638401"><span class="section-number-3">1.1.</span> MySQL to Mongo Lang!</h3>
+<div id="outline-container-org7ce735d" class="outline-3">
+<h3 id="org7ce735d"><span class="section-number-3">1.1.</span> MySQL to Mongo Lang!</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-orgedc991c" class="outline-4">
-<h4 id="orgedc991c"><span class="section-number-4">1.1.1.</span> Table/Collection creation</h4>
+<div id="outline-container-org2de8d5d" class="outline-4">
+<h4 id="org2de8d5d"><span class="section-number-4">1.1.1.</span> Table/Collection creation</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <div class="org-src-container">
 <pre class="src src-js">db.people.insertOne( {
@@ -289,8 +289,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org80e357f" class="outline-4">
-<h4 id="org80e357f"><span class="section-number-4">1.1.2.</span> Insertion</h4>
+<div id="outline-container-orgf8918c3" class="outline-4">
+<h4 id="orgf8918c3"><span class="section-number-4">1.1.2.</span> Insertion</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
 <pre class="src src-js">db.people.insertOne({
@@ -313,8 +313,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org19b53a3" class="outline-4">
-<h4 id="org19b53a3"><span class="section-number-4">1.1.3.</span> Queries</h4>
+<div id="outline-container-orgbcbf224" class="outline-4">
+<h4 id="orgbcbf224"><span class="section-number-4">1.1.3.</span> Queries</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <div class="org-src-container">
 <pre class="src src-js">db.people.find({
@@ -336,12 +336,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgdf040d8" class="outline-3">
-<h3 id="orgdf040d8"><span class="section-number-3">1.2.</span> How to install?</h3>
+<div id="outline-container-orgf6d8016" class="outline-3">
+<h3 id="orgf6d8016"><span class="section-number-3">1.2.</span> How to install?</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org5e7b9db" class="outline-4">
-<h4 id="org5e7b9db"><span class="section-number-4">1.2.1.</span> Headless windows server</h4>
+<div id="outline-container-org9ec6327" class="outline-4">
+<h4 id="org9ec6327"><span class="section-number-4">1.2.1.</span> Headless windows server</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 You can find whatever you are going to need in the link below, You also can use notes provided after the link!
@@ -375,8 +375,8 @@ You can provide other parameters such as:
 </div>
 </div>
 
-<div id="outline-container-orgfa36cb9" class="outline-4">
-<h4 id="orgfa36cb9"><span class="section-number-4">1.2.2.</span> Centos 8</h4>
+<div id="outline-container-org17d555e" class="outline-4">
+<h4 id="org17d555e"><span class="section-number-4">1.2.2.</span> Centos 8</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 You can find a rather verbose documentation on this website:
@@ -389,7 +389,7 @@ But these notes are less verbose and easier to follow if you are a experienced s
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orga6cd84d"></a>Configure package manager<br />
+<li><a id="org66e57cd"></a>Configure package manager<br />
 <div class="outline-text-5" id="text-1-2-2-1">
 <p>
 Before anything you need to add mongo&rsquo;s repository so that yum can install mongodb:
@@ -413,7 +413,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
 </div>
 </li>
 
-<li><a id="org1095145"></a>Install the package<br />
+<li><a id="org46aff25"></a>Install the package<br />
 <div class="outline-text-5" id="text-1-2-2-2">
 <p>
 Now you just need to run the command below and you are good to go:
@@ -429,8 +429,8 @@ Now you just need to run the command below and you are good to go:
 </ol>
 </div>
 
-<div id="outline-container-org20cbf50" class="outline-4">
-<h4 id="org20cbf50"><span class="section-number-4">1.2.3.</span> Ubuntu 20.04</h4>
+<div id="outline-container-org4800f2d" class="outline-4">
+<h4 id="org4800f2d"><span class="section-number-4">1.2.3.</span> Ubuntu 20.04</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 You can find a detailed blog post by digital ocean in the link below:
@@ -446,7 +446,7 @@ Or even mongo&rsquo;s documentation:
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org92e53e7"></a>Configure package manager<br />
+<li><a id="orgdc851be"></a>Configure package manager<br />
 <div class="outline-text-5" id="text-1-2-3-1">
 <p>
 We need to add mongo&rsquo;s repository to apt&rsquo;s configuration, as apt requires packages to be signed to prevent man-in-the-middle attack we need to import mongo&rsquo;s keys, for doing so we need to type the command below in our terminal:
@@ -476,8 +476,8 @@ After updating apt&rsquo;s db we can safely install mongodb package on our serve
 </ol>
 </div>
 
-<div id="outline-container-orgc00649e" class="outline-4">
-<h4 id="orgc00649e"><span class="section-number-4">1.2.4.</span> Starting mongo&rsquo;s service (Ubuntu and Centos)</h4>
+<div id="outline-container-org7f2c098" class="outline-4">
+<h4 id="org7f2c098"><span class="section-number-4">1.2.4.</span> Starting mongo&rsquo;s service (Ubuntu and Centos)</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
 As far as I know mongo can be handled by any INIT system such as systemd, runit, openrc, init.d. But as we all know, systemd this &ldquo;GOOD DEVIL&rdquo; is the most popular and every distro is using it; that&rsquo;s why I will only explain starting mongodb service using systemd:
@@ -499,8 +499,8 @@ As far as I know mongo can be handled by any INIT system such as systemd, runit,
 </div>
 </div>
 
-<div id="outline-container-org8952888" class="outline-3">
-<h3 id="org8952888"><span class="section-number-3">1.3.</span> How to automate this process?</h3>
+<div id="outline-container-orgac7dd1f" class="outline-3">
+<h3 id="orgac7dd1f"><span class="section-number-3">1.3.</span> How to automate this process?</h3>
 <div class="outline-text-3" id="text-1-3">
 <ol class="org-ol">
 <li>Ansible : <a href="https://galaxy.ansible.com/community/mongodb">https://galaxy.ansible.com/community/mongodb</a></li>
@@ -510,8 +510,8 @@ As far as I know mongo can be handled by any INIT system such as systemd, runit,
 </div>
 </div>
 
-<div id="outline-container-orgbe00bf7" class="outline-3">
-<h3 id="orgbe00bf7"><span class="section-number-3">1.4.</span> How to setup or database?</h3>
+<div id="outline-container-orgc4a19a2" class="outline-3">
+<h3 id="orgc4a19a2"><span class="section-number-3">1.4.</span> How to setup our database?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 If we successfully install mongodb on our server, we will have access to mongo cli tool, using that we can do all kind of stuff with our database :).
@@ -527,8 +527,8 @@ MongoDB server version: 4.4.10
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd63a031" class="outline-4">
-<h4 id="orgd63a031"><span class="section-number-4">1.4.1.</span> Creating a new user with admin access</h4>
+<div id="outline-container-org412f425" class="outline-4">
+<h4 id="org412f425"><span class="section-number-4">1.4.1.</span> Creating a new user with admin access</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <ol class="org-ol">
 <li>Creating an admin user for any database:</li>
@@ -586,8 +586,8 @@ db.createUser({
 </div>
 </div>
 </div>
-<div id="outline-container-org6e3e2ac" class="outline-4">
-<h4 id="org6e3e2ac"><span class="section-number-4">1.4.2.</span> Creating a new database</h4>
+<div id="outline-container-orgaf7df96" class="outline-4">
+<h4 id="orgaf7df96"><span class="section-number-4">1.4.2.</span> Creating a new database</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 There are to steps to it:
@@ -606,8 +606,8 @@ db.dummy.insert({
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc9e1e4" class="outline-4">
-<h4 id="orgdc9e1e4"><span class="section-number-4">1.4.3.</span> Connecting to our database</h4>
+<div id="outline-container-org32d5c2f" class="outline-4">
+<h4 id="org32d5c2f"><span class="section-number-4">1.4.3.</span> Connecting to our database</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 We can use mongouri for that matter, the overall format of it is:
@@ -622,7 +622,7 @@ We can use mongouri for that matter, the overall format of it is:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Tooraj Taraz</p>
-<p class="date">Created: 2021-11-03 Wed 08:57</p>
+<p class="date">Created: 2021-11-03 Wed 09:15</p>
 </div>
 </body>
 </html>
