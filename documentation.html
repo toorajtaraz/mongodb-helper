@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-03 Wed 08:57 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MongoDB</title>
+<meta name="author" content="Tooraj Taraz" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<style type="text/css">
+/* Base */html,body {    background-color: #222;    min-height: 100%;    line-height: 1.5;}body {    color: #fafafa;    font-family: "Courier New";}::selection {    background-color:  #2ecc40;    color: white;}/* Responsive content positioning */@media only screen and (min-width: 1020px) /* Large screens */{    body{        padding: 10vh 25vw;    }}@media only screen and (max-width: 1020px) and (min-width: 750px) /* Small screens */{    body{        padding: 5vh 10vw;    }}@media only screen and (max-width: 750px) /* Small screens */{    body{        padding: 2vh 5vw;    }}/* Headers */h1{font-size: 2.5rem;}h2{font-size: 1.7rem;}h1 > .subtitle, h3, h4, h5, h6{font-size: 1.3rem;}.title{    margin-bottom: 2.5rem;}/* Padding & Margin */* {margin: 0; padding: 0;}pre, blockquote, ul, ol, p, table{    margin: 1rem 0;}h1, h2{margin-top: 2rem; line-height: 2rem;}h3, h4, h5, h6{margin-top: 1rem;}/* Links  */a, a:visited {    color: #01ff70;    text-decoration: underline;}a:hover, a:focus, a:active {    color: #2ecc40;}/* Code */pre {    font-family: "Courier New";    padding: .5rem;    background-color: #333;    padding: 0.5rem;    border-radius: 0.2rem;    font-size: 0.9rem;    color: #EEE;    overflow-x: auto;}.org-keyword{    color: #01ff70;}.org-rainbow-delimiters-depth-1{    color: #2ecc40;}.org-rainbow-delimiters-depth-2{    color: #01ff70;}/* Blockquotes */blockquote {    border-left: 3px solid #01ff70;    padding-left: 1rem;}li{    list-style-position: inside;}/* Tags */.tag{    margin-top: 0.5rem;    display: block;    color: white;    font-size: var(--font-size-xsmall);}.tag > span{		font-weight: 400;    font-size: 0.8rem;    background-color: #444;    text-transform: uppercase;    border-radius: 2px;    width: fit-content;    height: auto;    padding: 1px 5px;}/* Keywords */.todo{    color: #2ecc40;}.done{    color: #444;}/* Overflows */.outline-text-2, .outline-text-3, .outline-text-4{	  max-width: 100%;	  overflow-x: auto;}/* Table */tr:nth-child(even) {    background-color: #333;}th, td{    padding: 0.5rem;    text-align: center;}.underline{    text-decoration: underline;}img{    max-width: 100%;    height: auto;}
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">MongoDB</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3fad2f7">1. MongoDB</a>
+<ul>
+<li><a href="#org6638401">1.1. MySQL to Mongo Lang!</a>
+<ul>
+<li><a href="#orgedc991c">1.1.1. Table/Collection creation</a></li>
+<li><a href="#org80e357f">1.1.2. Insertion</a></li>
+<li><a href="#org19b53a3">1.1.3. Queries</a></li>
+</ul>
+</li>
+<li><a href="#orgdf040d8">1.2. How to install?</a>
+<ul>
+<li><a href="#org5e7b9db">1.2.1. Headless windows server</a></li>
+<li><a href="#orgfa36cb9">1.2.2. Centos 8</a></li>
+<li><a href="#org20cbf50">1.2.3. Ubuntu 20.04</a></li>
+<li><a href="#orgc00649e">1.2.4. Starting mongo&rsquo;s service (Ubuntu and Centos)</a></li>
+</ul>
+</li>
+<li><a href="#org8952888">1.3. How to automate this process?</a></li>
+<li><a href="#orgbe00bf7">1.4. How to setup or database?</a>
+<ul>
+<li><a href="#orgd63a031">1.4.1. Creating a new user with admin access</a></li>
+<li><a href="#org6e3e2ac">1.4.2. Creating a new database</a></li>
+<li><a href="#orgdc9e1e4">1.4.3. Connecting to our database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3fad2f7" class="outline-2">
+<h2 id="org3fad2f7"><span class="section-number-2">1.</span> MongoDB</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org6638401" class="outline-3">
+<h3 id="org6638401"><span class="section-number-3">1.1.</span> MySQL to Mongo Lang!</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orgedc991c" class="outline-4">
+<h4 id="orgedc991c"><span class="section-number-4">1.1.1.</span> Table/Collection creation</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<div class="org-src-container">
+<pre class="src src-js">db.people.insertOne( {
+    user_id: <span style="color: #98be65;">"abc123"</span>,
+    age: <span style="color: #da8548; font-weight: bold;">55</span>,
+    status: <span style="color: #98be65;">"A"</span>
+ } )
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">CREATE</span> <span style="color: #51afef;">TABLE</span> <span style="color: #c678dd;">people</span> (
+    id MEDIUMINT <span style="color: #51afef;">NOT</span> <span style="color: #51afef;">NULL</span>
+        AUTO_INCREMENT,
+    user_id <span style="color: #ECBE7B;">Varchar</span>(<span style="color: #da8548; font-weight: bold;">30</span>),
+    age <span style="color: #51afef;">Number</span>,
+    status <span style="color: #ECBE7B;">char</span>(<span style="color: #da8548; font-weight: bold;">1</span>),
+    <span style="color: #51afef;">PRIMARY</span> <span style="color: #51afef;">KEY</span> (id)
+)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org80e357f" class="outline-4">
+<h4 id="org80e357f"><span class="section-number-4">1.1.2.</span> Insertion</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+<pre class="src src-js">db.people.insertOne({
+    user_id: <span style="color: #98be65;">"bcd001"</span>,
+    age: <span style="color: #da8548; font-weight: bold;">45</span>, status: <span style="color: #98be65;">"A"</span>
+})
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">INSERT</span> <span style="color: #51afef;">INTO</span> people(user_id,
+                  age,
+                  status
+                  )
+<span style="color: #51afef;">VALUES</span> ("bcd001",
+        <span style="color: #da8548; font-weight: bold;">45</span>,
+        "A"
+       )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org19b53a3" class="outline-4">
+<h4 id="org19b53a3"><span class="section-number-4">1.1.3.</span> Queries</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="org-src-container">
+<pre class="src src-js">db.people.find({
+    status: <span style="color: #98be65;">"A"</span>
+}).sort({
+    user_id: -<span style="color: #da8548; font-weight: bold;">1</span>
+})
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">SELECT</span> *
+<span style="color: #51afef;">FROM</span> people
+<span style="color: #51afef;">WHERE</span> status = "A"
+<span style="color: #51afef;">ORDER</span> <span style="color: #51afef;">BY</span> user_id <span style="color: #51afef;">DESC</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdf040d8" class="outline-3">
+<h3 id="orgdf040d8"><span class="section-number-3">1.2.</span> How to install?</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org5e7b9db" class="outline-4">
+<h4 id="org5e7b9db"><span class="section-number-4">1.2.1.</span> Headless windows server</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+You can find whatever you are going to need in the link below, You also can use notes provided after the link!
+</p>
+<ul class="org-ul">
+<li><a href="https://community.chocolatey.org/packages/mongodb">https://community.chocolatey.org/packages/mongodb</a></li>
+</ul>
+
+<p>
+Using this line of code you can install chocolatey package manager on your server:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">Set-ExecutionPolicy Bypass -Scope Process -Force; <span style="color: #51afef;">[</span>System.Net.ServicePointManager<span style="color: #51afef;">]</span>::SecurityProtocol = <span style="color: #51afef;">[</span>System.Net.ServicePointManager<span style="color: #51afef;">]</span>::SecurityProtocol -bor <span style="color: #da8548; font-weight: bold;">3072</span>; iex <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>New-Object System.Net.WebClient<span style="color: #c678dd;">)</span>.DownloadString<span style="color: #c678dd;">(</span><span style="color: #98be65;">'https://community.chocolatey.org/install.ps1'</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+You just need to run this command on your server, please have in mind that prior to this command you need to install chocolatey package manager on your server:
+,#+BEGIN_SRC shell
+choco install mongodb &#x2013;pre
+#+END_SRC
+</p>
+
+<p>
+You can provide other parameters such as:
+</p>
+<ol class="org-ol">
+<li>/dataPath: - where MongoDB stores its database files - defaults to &ldquo;$env:ProgramData\MongoDB\data\db&rdquo;</li>
+<li>/logPath: - where MongoDB stores its logs - defaults to &ldquo;$env:ProgramData\MongoDBlog&rdquo;</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgfa36cb9" class="outline-4">
+<h4 id="orgfa36cb9"><span class="section-number-4">1.2.2.</span> Centos 8</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+You can find a rather verbose documentation on this website:
+</p>
+<ul class="org-ul">
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/</a></li>
+</ul>
+<p>
+But these notes are less verbose and easier to follow if you are a experienced system admin.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orga6cd84d"></a>Configure package manager<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+Before anything you need to add mongo&rsquo;s repository so that yum can install mongodb:
+Use your favorite command-line text editor to create a file in this path:
+</p>
+<ul class="org-ul">
+<li>/etc/yum.repos.d/mongodb-org-5.0.repo</li>
+</ul>
+<p>
+And paste this yaml file:
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml">[mongodb-org-5.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/5.0/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org1095145"></a>Install the package<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<p>
+Now you just need to run the command below and you are good to go:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #ECBE7B;">sudo</span> yum install -y mongodb-org
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">Or for installing a specific version</span>
+<span style="color: #ECBE7B;">sudo</span> yum install -y mongodb-org-5.0.2 mongodb-org-database-5.0.2 mongodb-org-server-5.0.2 mongodb-org-shell-5.0.2 mongodb-org-mongos-5.0.2 mongodb-org-tools-5.0.2
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org20cbf50" class="outline-4">
+<h4 id="org20cbf50"><span class="section-number-4">1.2.3.</span> Ubuntu 20.04</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+You can find a detailed blog post by digital ocean in the link below:
+</p>
+<ul class="org-ul">
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04</a></li>
+</ul>
+<p>
+Or even mongo&rsquo;s documentation:
+</p>
+<ul class="org-ul">
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/</a></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org92e53e7"></a>Configure package manager<br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+We need to add mongo&rsquo;s repository to apt&rsquo;s configuration, as apt requires packages to be signed to prevent man-in-the-middle attack we need to import mongo&rsquo;s keys, for doing so we need to type the command below in our terminal:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #ECBE7B;">curl</span> -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | <span style="color: #ECBE7B;">sudo</span> apt-key add -
+</pre>
+</div>
+<p>
+OK
+Now we can add mongo&rsquo;s repository:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse"</span> | <span style="color: #ECBE7B;">sudo</span> tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+</pre>
+</div>
+<p>
+After updating apt&rsquo;s db we can safely install mongodb package on our server:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #ECBE7B;">sudo</span> apt update
+<span style="color: #ECBE7B;">sudo</span> apt install mongodb-org
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgc00649e" class="outline-4">
+<h4 id="orgc00649e"><span class="section-number-4">1.2.4.</span> Starting mongo&rsquo;s service (Ubuntu and Centos)</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+As far as I know mongo can be handled by any INIT system such as systemd, runit, openrc, init.d. But as we all know, systemd this &ldquo;GOOD DEVIL&rdquo; is the most popular and every distro is using it; that&rsquo;s why I will only explain starting mongodb service using systemd:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;">#</span><span style="color: #5B6268;">TO START</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl start mongod
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">TO START AND ENABLE AUTOSTART</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl enable --now mongod
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">TO STOP</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl stop mongod
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">TO RESTART</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl restart mongod
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">TO DISABLE AUTOSTART</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl disable mongod
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8952888" class="outline-3">
+<h3 id="org8952888"><span class="section-number-3">1.3.</span> How to automate this process?</h3>
+<div class="outline-text-3" id="text-1-3">
+<ol class="org-ol">
+<li>Ansible : <a href="https://galaxy.ansible.com/community/mongodb">https://galaxy.ansible.com/community/mongodb</a></li>
+<li>Puppet : <a href="https://forge.puppet.com/modules/puppet/mongodb">https://forge.puppet.com/modules/puppet/mongodb</a></li>
+<li>Chef : <a href="https://supermarket.chef.io/cookbooks/mongodb">https://supermarket.chef.io/cookbooks/mongodb</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbe00bf7" class="outline-3">
+<h3 id="orgbe00bf7"><span class="section-number-3">1.4.</span> How to setup or database?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+If we successfully install mongodb on our server, we will have access to mongo cli tool, using that we can do all kind of stuff with our database :).
+Before moving on issue this command to get mongodb&rsquo;s interactive command line:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ mongo
+MongoDB shell version v4.4.10
+connecting to: mongodb://127.0.0.1:27017/?<span style="color: #dcaeea;">compressors</span>=disabled&amp;<span style="color: #dcaeea;">gssapiServiceName</span>=mongodb
+Implicit session: session <span style="color: #51afef;">{</span> <span style="color: #98be65;">"id"</span> : UUID<span style="color: #c678dd;">(</span><span style="color: #98be65;">"66ed5c8d-e780-47d9-822e-c747a35870cd"</span><span style="color: #c678dd;">)</span> <span style="color: #51afef;">}</span>
+MongoDB server version: 4.4.10
+&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd63a031" class="outline-4">
+<h4 id="orgd63a031"><span class="section-number-4">1.4.1.</span> Creating a new user with admin access</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<ol class="org-ol">
+<li>Creating an admin user for any database:</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-js">use admin
+db.createUser({
+    user: <span style="color: #98be65;">"mongoadmin"</span>,
+    pwd: <span style="color: #98be65;">"mongoadmin"</span>,
+    roles: [
+        <span style="color: #98be65;">"userAdminAnyDatabase"</span>,
+        <span style="color: #98be65;">"dbAdminAnyDatabase"</span>,
+        <span style="color: #98be65;">"readWriteAnyDatabase"</span>
+    ]
+})
+</pre>
+</div>
+<ol class="org-ol">
+<li>Creating user for different databases with different roles:</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-js">use admin
+db.createUser({
+    user:<span style="color: #98be65;">"replSetManager"</span>,
+    pwd:<span style="color: #98be65;">"password"</span>,
+    roles:[
+        {
+            role:<span style="color: #98be65;">"clusterManager"</span>,
+            db:<span style="color: #98be65;">"admin"</span>
+        },
+        {
+            role:<span style="color: #98be65;">"dbOwner"</span>,
+            db:<span style="color: #98be65;">"adminsblog"</span>
+        },
+        {
+            role:<span style="color: #98be65;">"readWrite"</span>,
+            db:<span style="color: #98be65;">"departmentblog"</span>
+        },
+        {
+            role:<span style="color: #98be65;">"read"</span>,
+            db:<span style="color: #98be65;">"otherblog"</span>
+        }
+    ]
+})
+</pre>
+</div>
+<ol class="org-ol">
+<li>Enabling authorization (OPTIONAL)</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #5B6268;">#</span><span style="color: #5B6268;">open /etc/mongod.conf with your favorite text editor and add this section:</span>
+<span style="color: #dcaeea;">security</span>:
+  <span style="color: #dcaeea;">authorization</span>: enabled
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e3e2ac" class="outline-4">
+<h4 id="org6e3e2ac"><span class="section-number-4">1.4.2.</span> Creating a new database</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+There are to steps to it:
+</p>
+<ol class="org-ol">
+<li>Telling mongodb name of the database</li>
+<li>Insert something to this database</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-js">use myBrandNewDB
+db.dummy.insert({
+    name: <span style="color: #98be65;">"Ada Lovelace"</span>,
+    age: <span style="color: #da8548; font-weight: bold;">205</span>
+})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdc9e1e4" class="outline-4">
+<h4 id="orgdc9e1e4"><span class="section-number-4">1.4.3.</span> Connecting to our database</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+We can use mongouri for that matter, the overall format of it is:
+</p>
+<ul class="org-ul">
+<li>mongodb://[user]:[pass]@[server address]:[port]/[database name]</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Tooraj Taraz</p>
+<p class="date">Created: 2021-11-03 Wed 08:57</p>
+</div>
+</body>
+</html>
